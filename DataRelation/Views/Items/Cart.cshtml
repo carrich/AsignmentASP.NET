@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@using DataRelation.Models
+<h2>Cart</h2>
+<table  class="table">
+    <tr>
+
+        <th>Image</th>
+        <th>Size</th>
+        <th>Material</th>
+        <th>Quantity</th>
+        <th>Sub-Total</th>
+        <th></th>
+    </tr>
+    @{List<Item> cart = (List<Item>)Session["cart"]; }
+    @for (int i = 0; i < cart.Count; i++)
+    {
+    <tr>
+
+        <td> <img src="@Url.Content(cart[i].PathImage)" width="250" height="250" /></td>
+        <td>@cart[i].Size1.Name</td>
+        <td>@cart[i].Material1.Name</td>
+        <td>@cart[i].Quantity</td>
+        <td>@(cart[i].Quantity * cart[i].Size1.Price * cart[i].Material1.Price)</td>
+        <td>@Html.ActionLink("Delete", "Delete1", "Items", new { id = i }, null)</td>
+    </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Back to List", "Index", "Images", null, null)
+</div>
